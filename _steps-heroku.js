@@ -16,7 +16,9 @@ For each Project One time:
 -git commit  -m"updated"
 -git push
 
-3. finally git push heroku main
+3. finally git push heroku main and server will be deployed
+4. then go to heroku website and click on dashboard > Current project name > setting > reveal config 
+5. then put the info which is in .env file which didnt go to github.
 
 
 */
