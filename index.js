@@ -91,12 +91,12 @@ async function run() {
         //     res.send(cursor);
         // })
 
-        app.get('/parts', async (req, res) => {
-            const query = {};
-            const cursor = await partsCollection.find(query).toArray()
+        // app.get('/parts', async (req, res) => {
+        //     const query = {};
+        //     const cursor = await partsCollection.find(query).toArray()
 
-            res.send(cursor);
-        })
+        //     res.send(cursor);
+        // })
 
 
         // getting all parts 
