@@ -39,7 +39,7 @@ function verifyJWT(req, res, next) {
     // console.log('abc')
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-        return res.status(401).send({ message: 'Un-Authorized Access' })
+        return res.status(401).send({ message: ' sorry Un-Authorized Access' })
     }
     const token = authHeader.split(' ')[1];
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
@@ -108,13 +108,17 @@ async function run() {
             res.send(parts)
         })
 
-
+        app.get('/orders', async (req, res) => {
+            const cursor = await orderCollection.find({}).toArray();
+            res.send(cursor);
+        })
 
 
 
         // getting all orders according to individual email address 
         app.get('/orders', verifyJWT, async (req, res) => {
-            const email = req.query.userEmail
+            const email = req.query.userEmail;
+            console.log(email)
             const decodedEmail = req.decoded.email
             if (email === decodedEmail) {
                 const query = { userEmail: email }
@@ -367,7 +371,6 @@ async function run() {
             const result = await partsCollection.updateOne(filter, updateDoc, options);
             res.send(result)
         })
-
 
         //------------------------------------------------------------------------
         //for portfolio project
