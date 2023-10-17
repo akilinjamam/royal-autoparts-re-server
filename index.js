@@ -16,7 +16,10 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send('this is royal auto parts')
+    res.status(200).json({
+        status: 'success',
+        message: 'this is royal auto parts'
+    })
 })
 
 app.listen(port, () => {
@@ -28,7 +31,7 @@ app.listen(port, () => {
 
 
 const uri = `${process.env.DB_URI}`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1, serverSelectionTimeoutMS: 5000 });
 
 //--------------------------------------------------------------------------------
 
@@ -54,18 +57,12 @@ function verifyJWT(req, res, next) {
 
 //-----------------------------------------------------------------
 
-
-
-
-
-
-
-
 async function run() {
 
     try {
         await client.connect();
-        console.log('connected royal autoparts')
+        console.log('connected royal autoparts');
+
 
         const partsCollection = client.db('royal_autoparts').collection('parts')
         const orderCollection = client.db('royal_autoparts').collection('orders')
