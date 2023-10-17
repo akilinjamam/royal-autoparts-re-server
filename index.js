@@ -81,20 +81,8 @@ async function run() {
 
 
 
-
-        // getting all orders
-
-        // app.get('/orders', async (req, res) => {
-        //     const query = {};
-        //     const cursor = await orderCollection.find(query).toArray()
-
-        //     res.send(cursor);
-        // })
-
         app.get('/parts', async (req, res) => {
-            const query = {};
-            const cursor = await partsCollection.find(query).toArray()
-
+            const cursor = await partsCollection.find({}).toArray()
             res.send(cursor);
         })
 
